@@ -2,7 +2,7 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
-    background-color:rgb(251, 251, 251);
+    background-color:rgb(198, 229, 243);
 }
 
 .container {
@@ -24,4 +24,19 @@ h1, h2 {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+}
+
+.product {
+    background: rgb(247, 245, 245);
+    border: 1px solid #4a9ff4;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 15px;
+    width: calc(33% - 20px);
+    box-shadow: 0 2px 5px rgba(251, 251, 251);
+    text-align: center;
+}
+
+button:hover {
+    background-color:rgb(135, 201, 244)
 }
