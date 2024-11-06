@@ -40,3 +40,10 @@ h1, h2 {
 button:hover {
     background-color:rgb(135, 201, 244)
 }
+
+.modal-content {
+    background-color:rgb(67, 120, 152);
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px;
+}
