@@ -41,9 +41,17 @@ button:hover {
     background-color:rgb(135, 201, 244)
 }
 
+.cart {
+    margin-top: 40px;
+    background: rgb(188, 188, 245);
+    padding: 10px;
+    border: 1px solid #7eadf4;
+    border-radius: 5px;
+}
+
 .modal-content {
-    background-color:rgb(67, 120, 152);
+    background-color:rgb(188, 188, 245);
     margin: 5% auto;
     padding: 20px;
-    border: 1px;
+    border: 1px solid #7eadf4;
 }
