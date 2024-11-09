@@ -13,6 +13,11 @@ function addToCart(productName, productPrice, button) {
     const existingProductIndex = cart.findIndex(item => item.name === productName);
 
     if (existingProductIndex > -1) {
-      
+      // Jika Produk sudah ada di keranjang, tambahkan jumlahnya
+      cart[existingProductIndex].quantity += quantity;
+    } else {
+        // Jika produk belum ada, tambahkan ke keranjang
+        cart.push({ name: productName, price: productPrice, quanity: quantity });
     }
+        updateCart();
 }
