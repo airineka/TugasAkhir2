@@ -21,3 +21,16 @@ function addToCart(productName, productPrice, button) {
     }
         updateCart();
 }
+
+// Memperbarui tampilan keranjang
+function updateCart() {
+    const cartItemsContainer = document.getElementById('cart-items');
+    cartItemsContainer.innerHTML = ''; 
+
+    let totalPrice = 0;
+
+    cart.forEach((item, index) => {
+        const itemTotal = item.price * item.quantity;
+        totalPrice += itemTotal;
+    })
+}
