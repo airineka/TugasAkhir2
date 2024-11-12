@@ -32,5 +32,16 @@ function updateCart() {
     cart.forEach((item, index) => {
         const itemTotal = item.price * item.quantity;
         totalPrice += itemTotal;
-    })
+
+        const itemDiv = document.createElement('div');
+        itemDiv.innerHTML = `
+                <span>${item.name} - Rp.${item.price} x ${item.quantity} = Rp.&{itemTotal}</span>
+                <button onclick="changeQuantity(&{index}, -1)">-</button>
+                <button onclick="changeQuantity(${index}, 1)">+</button>
+                <button onclick="removeFromCart(${index})">Hapus</button>
+                `;
+                cartItemsContainer.appendChild(itemDiv)
+    });
+
+    document.getElementById('total-price').innerText = `Total Harga: Rp.${totalPrice}`;
 }
