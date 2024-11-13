@@ -45,3 +45,19 @@ function updateCart() {
 
     document.getElementById('total-price').innerText = `Total Harga: Rp.${totalPrice}`;
 }
+
+// Mengubah jumlah produk di keranjang
+function changeQuantity(index, change) {
+    cart[index].quantity += change;
+    if (cart[index].quantity <= 0) {
+        removeFromCart(index);
+    } else {
+        updateCart();
+    }
+}
+
+// Menghapus produk dari keranjang
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    updateCart();
+}
