@@ -61,3 +61,21 @@ function removeFromCart(index) {
     cart.splice(index, 1);
     updateCart();
 }
+
+// Checkout
+document.getElementById('checkout-form').addEventListener('submit' , function(event) {
+    event.preventDefault(); 
+
+    const fullName = document.getElementById('full-name').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const address = document.getElementById('Alamat').value;
+    const paymentMethod = document.getElementById('payment-method').value;
+    const expiryDate = doocument.getElementById('expiry-date').value;
+
+    // Validasi Form
+    if (!fullName || !email || !phone || !address || !paymentMethod) {
+        alert("Semua field harus diisi!");
+        return;
+    }
+})
