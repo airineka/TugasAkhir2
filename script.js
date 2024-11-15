@@ -78,4 +78,20 @@ document.getElementById('checkout-form').addEventListener('submit' , function(ev
         alert("Semua field harus diisi!");
         return;
     }
-})
+
+    if (paymentMethod === "Kartu Kredit" && !expiryDate) {
+        alert("Tanggal kadaluarsa harus diisi jika metode pembayaran adalah Kartu Kredit.");
+        return;
+    }
+
+    //Jika semua validasi berhasil
+    alert("Checkout berhasil! Terima Kasih, " + fullName);
+    resetCart();
+});
+
+// reset keranjang dan form
+function reserCart() {
+    cart = [];
+    updateCart();
+    document.getElementById('checkout-form').reset();
+}
