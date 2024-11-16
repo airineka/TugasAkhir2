@@ -95,3 +95,16 @@ function reserCart() {
     updateCart();
     document.getElementById('checkout-form').reset();
 }
+
+// Menambahkan tooltip
+const inputs = document.querySelectorAll('input, select');
+inputs.forEach(input => {
+    const tooltip = document.createElement('span');
+    tooltip.className = 'tooltip';
+    tooltip.innerText = input.getAttribute('placeholder');
+    input.parentElement.insertBefore(tooltip, input.nextSibling);
+
+    input.addEventListener('focus', () => {
+        tooltip.style.display = 'block';
+    });
+})
