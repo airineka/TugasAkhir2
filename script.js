@@ -107,4 +107,10 @@ inputs.forEach(input => {
     input.addEventListener('focus', () => {
         tooltip.style.display = 'block';
     });
-})
+    input.addEventListener('blur', () => {
+        tooltip.style.display = 'none';
+    });
+});
+
+// Menampilkan pesan sukses atau error
+document.getElementById('reset-cart').addEventListener('click', resetCart);
