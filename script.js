@@ -1,4 +1,9 @@
-let cart = [];
+// let cart = [];
+
+const cart = [
+    { name: "Mobil Mainan", quantity: 1, price: 50000 },
+];
+
 
 // menambahkan produk ke keranjang
 function addToCart(productName, productPrice, button) {
@@ -30,8 +35,14 @@ function updateCart() {
     let totalPrice = 0;
 
     cart.forEach((item, index) => {
-        const itemTotal = item.price * item.quantity;
+       const itemTotal = item.price * item.quantity;
+       totalPrice += itemTotal;
+       cart.forEach(item => {
+       console.log(item); // Melihat nilai item
+        const itemTotal = item.quantity * item.price;
+        console.log(`Item Total: ${itemTotal}`);
         totalPrice += itemTotal;
+       });
 
         const itemDiv = document.createElement('div');
         itemDiv.innerHTML = `
