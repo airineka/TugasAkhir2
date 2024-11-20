@@ -1,7 +1,8 @@
 // let cart = [];
 
 const cart = [
-    { name: "Mobil Mainan", quantity: 1, price: 50000 },
+    //{ name: "Mobil Mainan", quantity: 1, price: 50000 },
+    //{ name: "Sepeda Mainan", quantity: 1, price: 90000 }
 ];
 
 
@@ -35,21 +36,21 @@ function updateCart() {
     let totalPrice = 0;
 
     cart.forEach((item, index) => {
-       const itemTotal = item.price * item.quantity;
-       totalPrice += itemTotal;
+       const itemTotal = item.quantity * item.price;
+       totalPrice += itemTotal; 
        cart.forEach(item => {
        console.log(item); // Melihat nilai item
-        const itemTotal = item.quantity * item.price;
+       const itemTotal = item.quantity * item.price;
         console.log(`Item Total: ${itemTotal}`);
-        totalPrice += itemTotal;
+       totalPrice += itemTotal;
        });
 
         const itemDiv = document.createElement('div');
         itemDiv.innerHTML = `
-                <span>${item.name} - Rp.${item.price} x ${item.quantity} = Rp.&{itemTotal}</span>
-                <button onclick="changeQuantity(&{index}, -1)">-</button>
+                <span>${item.name} = Rp.${item.price} x ${item.quantity} = Rp.${itemTotal}</span>
+                <button onclick="changeQuantity(${index}, -1)">-</button>
                 <button onclick="changeQuantity(${index}, 1)">+</button>
-                <button onclick="removeFromCart(${index})">Hapus</button>
+                <button onclick="removeFromCart(${index},">Hapus</button>
                 `;
                 cartItemsContainer.appendChild(itemDiv)
     });
@@ -125,3 +126,4 @@ inputs.forEach(input => {
 
 // Menampilkan pesan sukses atau error
 document.getElementById('reset-cart').addEventListener('click', resetCart);
+
