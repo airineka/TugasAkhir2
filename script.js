@@ -1,10 +1,33 @@
-// let cart = [];
+let cart = [
 
-const cart = [
-    //{ name: "Mobil Mainan", quantity: 1, price: 50000 },
-    //{ name: "Sepeda Mainan", quantity: 1, price: 90000 }
+//const cart = [
+    { name: "Mobil Mainan", quantity: 1, price: 50000 },
+    { name: "Sepeda Mainan", quantity: 1, price: 90000 },
+    { name: "Telephone", quantity: 1, price: 30000 },
+    { name: "Pop It", quantity: 1, price: 65000 },
+    { name: "Boneka Beruang", quantity: 1, price: 150000 },
+    { name: "Piano Toy", quantity: 1, price: 200000 },
+    { name: "Blok Bangunan", quantity: 1, price: 45000 },
+    { name: "Mesin Jahit", quantity: 1, price: 35000 },
+    { name: "Lato-Lato", quantity: 1, price: 7000 },
+    { name: "Boneka Labubu", quantity: 1, price: 10000 },
+    { name: "Bike Helmet", quantity: 1, price: 185000 },
+    { name: "Kacamata Renang", quantity: 1, price: 12000 },
+    { name: "Kolam Anak", quantity: 1, price: 142000 },
+    { name: "Trampolin", quantity: 1, price: 830000 },
+    { name: "Perosotan", quantity: 1, price: 880000 },
+    { name: "Laptop Mainan", quantity: 1, price: 60000 },
+    { name: "Mobil Remote", quantity: 1, price: 200000 },
+    { name: "Basketball", quantity: 1, price: 125000 },
+    { name: "Animal Jumping", quantity: 1, price: 90000 },
+    { name: "Pancing Magnet", quantity: 1, price: 17000 },
+    { name: "Bath Duck", quantity: 1, price: 20000 },
+    { name: "Kaktus", quantity: 1, price: 45000 },
+    { name: "Puffer Ball", quantity: 1, price: 20000 },
+    { name: "Boneka Dino", quantity: 1, price: 55000 },
+    { name: "Small Duck", quantity: 1, price: 38000 },
+    { name: "Bubble Gun", quantity: 1, price: 300000 },
 ];
-
 
 // menambahkan produk ke keranjang
 function addToCart(productName, productPrice, button) {
@@ -20,10 +43,10 @@ function addToCart(productName, productPrice, button) {
 
     if (existingProductIndex > -1) {
       // Jika Produk sudah ada di keranjang, tambahkan jumlahnya
-      cart[existingProductIndex].quantity += quantity;
+      cart[existingProductIndex].quantity += item.quantity;
     } else {
         // Jika produk belum ada, tambahkan ke keranjang
-        cart.push({ name: productName, price: productPrice, quanity: quantity });
+        cart.push({ name: productName, price: productPrice, quantity: quantity });
     }
         updateCart();
 }
@@ -35,7 +58,12 @@ function updateCart() {
 
     let totalPrice = 0;
 
-    cart.forEach((item, index) => {
+
+   cart.forEach((item, index) => {
+    if (typeof item.quantity !== 'number' || typeof item.price !== 'number') {
+        console.error("Quantity or price is not a number:", item.quantity, item.price);
+        return; // Keluar dari fungsi jika quantity atau price bukan angka
+    }
        const itemTotal = item.quantity * item.price;
        totalPrice += itemTotal; 
        cart.forEach(item => {
@@ -50,12 +78,12 @@ function updateCart() {
                 <span>${item.name} = Rp.${item.price} x ${item.quantity} = Rp.${itemTotal}</span>
                 <button onclick="changeQuantity(${index}, -1)">-</button>
                 <button onclick="changeQuantity(${index}, 1)">+</button>
-                <button onclick="removeFromCart(${index},">Hapus</button>
+                <button onclick="removeFromCart(${index})">Hapus</button>
                 `;
                 cartItemsContainer.appendChild(itemDiv)
     });
 
-    document.getElementById('total-price').innerText = `Total Harga: Rp.${totalPrice}`;
+   document.getElementById('total-price').innerText = `Total Harga: Rp.${totalPrice}`;
 }
 
 // Mengubah jumlah produk di keranjang
@@ -102,7 +130,7 @@ document.getElementById('checkout-form').addEventListener('submit' , function(ev
 });
 
 // reset keranjang dan form
-function reserCart() {
+function resetCart() {
     cart = [];
     updateCart();
     document.getElementById('checkout-form').reset();
