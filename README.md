@@ -1,3 +1,7 @@
-# E-Commerce
-# E-Commerce
-# TugasAkhir2
+Deskripsi Proyek : 
+
+Cara Menjalankan proyek :
+
+Penjelasan setiap branch dan fitur-fiturnya : 
+
+
