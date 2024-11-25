@@ -33,6 +33,16 @@ let cart = [
 async function fetchProducts() {
     const cacheKey = 'productsCache';
     const cachedData = localStorage.getItem(cacheKey);  
+
+    if (cachedData) {
+        displayProduct(JSON.parse(cachedData));
+    } else {
+        try {
+            const response = await fetch('https: //fakestoreapi.com/product');
+            const products = await response.json();
+            localStorage.setItem(cacheKey, JSON.stringify(products));
+        }
+    }
 }
 
 // menambahkan produk ke keranjang
