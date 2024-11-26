@@ -38,9 +38,12 @@ async function fetchProducts() {
         displayProduct(JSON.parse(cachedData));
     } else {
         try {
-            const response = await fetch('https: //fakestoreapi.com/product');
+            const response = await fetch('https://fakestoreapi.com/product');
             const products = await response.json();
             localStorage.setItem(cacheKey, JSON.stringify(products));
+            displayProducts(products);
+        } catch (error) {
+            console.error();
         }
     }
 }
