@@ -103,6 +103,18 @@ function updateCart() {
                 cartItemsContainer.appendChild(itemDiv)
     });
 
+    // Memfilter produk
+    function filterProducts() {
+        const categoryFilter = document.getElementById('category-filter').value;
+        const searchInput = document.getElementById('search-input').value.toLowerCase();
+
+        const filteredProducts = products.filter(product => {
+            const matchesCategory = categoryFilter === '' || product.category === categoryFilter;
+            const matchesSearch = product.name.toLowerCase().includes(searchInput);
+
+        })
+    }
+
    document.getElementById('total-price').innerText = `Total Harga: Rp.${totalPrice}`;
 }
 
