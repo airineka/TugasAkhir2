@@ -111,9 +111,17 @@ function updateCart() {
         const filteredProducts = products.filter(product => {
             const matchesCategory = categoryFilter === '' || product.category === categoryFilter;
             const matchesSearch = product.name.toLowerCase().includes(searchInput);
+            return matchesCategory && matchesSearch;
+     });
 
-        })
+     displayProducts(filteredProducts);
     }
+
+    // Event listener untuk filter kategori
+    document.getElementById('category-filter').addEventListener('change', filterProducts);
+
+    // Event Listener untuk pencarian
+    document.getElementById('search-input').addEventListener('input', filterProducts);
 
    document.getElementById('total-price').innerText = `Total Harga: Rp.${totalPrice}`;
 }
