@@ -1,32 +1,32 @@
-let cart = [
+const products = [
 
 //const cart = [
-    { name: "Mobil Mainan", quantity: 1, price: 50000 },
-    { name: "Sepeda Mainan", quantity: 1, price: 90000 },
-    { name: "Telephone", quantity: 1, price: 30000 },
-    { name: "Pop It", quantity: 1, price: 65000 },
-    { name: "Boneka Beruang", quantity: 1, price: 150000 },
-    { name: "Piano Toy", quantity: 1, price: 200000 },
-    { name: "Blok Bangunan", quantity: 1, price: 45000 },
-    { name: "Mesin Jahit", quantity: 1, price: 35000 },
-    { name: "Lato-Lato", quantity: 1, price: 7000 },
-    { name: "Boneka Labubu", quantity: 1, price: 10000 },
-    { name: "Bike Helmet", quantity: 1, price: 185000 },
-    { name: "Kacamata Renang", quantity: 1, price: 12000 },
-    { name: "Kolam Anak", quantity: 1, price: 142000 },
-    { name: "Trampolin", quantity: 1, price: 830000 },
-    { name: "Perosotan", quantity: 1, price: 880000 },
-    { name: "Laptop Mainan", quantity: 1, price: 60000 },
-    { name: "Mobil Remote", quantity: 1, price: 200000 },
-    { name: "Basketball", quantity: 1, price: 125000 },
-    { name: "Animal Jumping", quantity: 1, price: 90000 },
-    { name: "Pancing Magnet", quantity: 1, price: 17000 },
-    { name: "Bath Duck", quantity: 1, price: 20000 },
-    { name: "Kaktus", quantity: 1, price: 45000 },
-    { name: "Puffer Ball", quantity: 1, price: 20000 },
-    { name: "Boneka Dino", quantity: 1, price: 55000 },
-    { name: "Small Duck", quantity: 1, price: 38000 },
-    { name: "Bubble Gun", quantity: 1, price: 300000 },
+    { name: "Mobil Mainan", quantity: 1, price: 50000,  category: 'mainan', Image: 'Mobil Mainan.jpg' },
+    { name: "Sepeda Mainan", quantity: 1, price: 90000, category: 'mainan',  Image: 'funbike-vespa-warna-kuning.png' },
+    { name: "Telephone", quantity: 1, price: 30000, category: 'mainan', Image: 'Telephonemobil tarik.jpg' },
+    { name: "Pop It", quantity: 1, price: 65000, category: 'mainan', Image: 'img11012-1690972867.jpg' },
+    { name: "Boneka Beruang", quantity: 1, price: 150000, category: 'mainan', Image: 'Boneka Beruang.jpg' },
+    { name: "Piano Toy", quantity: 1, price: 200000, category: 'mainan', Image: 'https___twitter_com_MomsTrustyDeals_status_1015301990774165507 ☝️🔥Enter Multi-Use code 25AN096PI at checkout for 25% OFF🔥☝️ 👉Prices_codes valid at time posted & can expire at anytime.jpeg' },
+    { name: "Blok Bangunan", quantity: 1, price: 45000, category: 'mainan', Image: 'tausendkind Online Shop für Baby- & Kinderausstattung.jpeg' },
+    { name: "Mesin Jahit", quantity: 1, price: 35000, category: 'mainan', Image: 'mesin jahit.jpeg' },
+    { name: "Lato-Lato", quantity: 1, price: 7000, category: 'mainan', Image: 'Bola Klakson, Latto, Mainan, Klakson PNG Transparan Clipart dan File PSD untuk Unduh Gratis.jpeg' },
+    { name: "Boneka Labubu", quantity: 1, price: 10000, category: 'mainan', Image: 'download (1).jpeg' },
+    { name: "Bike Helmet", quantity: 1, price: 185000, category: 'mainan', Image: 'Miniz Mouse.jpeg' },
+    { name: "Kacamata Renang", quantity: 1, price: 12000, category: 'mainan', Image: 'download.jpeg' },
+    { name: "Kolam Anak", quantity: 1, price: 142000, category: 'mainan', Image: 'kolam anak.jpeg' },
+    { name: "Trampolin", quantity: 1, price: 830000, category: 'mainan', Image: 'trampolin.jpeg' },
+    { name: "Perosotan", quantity: 1, price: 880000, category: 'mainan', Image: 'trampolin.jpeg' },
+    { name: "Laptop Mainan", quantity: 1, price: 60000, category: 'mainan', Image: 'laptop mainan.jpeg' },
+    { name: "Mobil Remote", quantity: 1, price: 200000, category: 'mainan', Image: 'mobil remote.jpeg' },
+    { name: "Basketball", quantity: 1, price: 125000, category: 'mainan', Image: 'basketball.jpeg' },
+    { name: "Animal Jumping", quantity: 1, price: 90000, category: 'mainan', Image: 'animal jumping.jpeg  ' },
+    { name: "Pancing Magnet", quantity: 1, price: 17000, category: 'mainan', Image: 'pancing.jpeg' },
+    { name: "Bath Duck", quantity: 1, price: 20000, category: 'mainan', Image: 'Novelty Place Assorted Rubber Ducks.jpeg' },
+    { name: "Kaktus", quantity: 1, price: 45000, category: 'mainan', Image: 'kaktus.jpeg' },
+    { name: "Puffer Ball", quantity: 1, price: 20000, category: 'mainan', Image: 'pufferball.jpeg' },
+    { name: "Boneka Dino", quantity: 1, price: 55000, category: 'mainan', Image: 'Dinosaur soft toy.jpeg' },
+    { name: "Small Duck", quantity: 1, price: 38000, category: 'small duck.jpeg' },
+    { name: "Bubble Gun", quantity: 1, price: 300000, category: 'mainan', Image: 'bubble gun.jpeg' },
 ];
 
 // untuk mengambil data produk dari API
@@ -103,6 +103,16 @@ function updateCart() {
                 cartItemsContainer.appendChild(itemDiv)
     });
 
+    // fungsi untuk menampilkan produk
+    function displayProducts(filteredProducts) {
+        const productList = document.querySelector('.product-list');
+        productList.innerHTML = ''; //kososngkan daftar produk
+
+        filteredProducts.forEach(product => {
+            const productDiv = document.createElement('div');
+        } )
+    }
+
     // Memfilter produk
     function filterProducts() {
         const categoryFilter = document.getElementById('category-filter').value;
@@ -122,6 +132,8 @@ function updateCart() {
 
     // Event Listener untuk pencarian
     document.getElementById('search-input').addEventListener('input', filterProducts);
+
+    displayProducts(products);
 
    document.getElementById('total-price').innerText = `Total Harga: Rp.${totalPrice}`;
 }
