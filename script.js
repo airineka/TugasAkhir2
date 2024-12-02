@@ -48,6 +48,10 @@ async function fetchProducts() {
     }
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    fetchProducts();
+});
+
 // menambahkan produk ke keranjang
 function addToCart(productName, productPrice, button) {
     const quantityInput = button.previousElementSibling;
@@ -110,7 +114,19 @@ function updateCart() {
 
         filteredProducts.forEach(product => {
             const productDiv = document.createElement('div');
-        } )
+            productDiv.classList.add('product');
+            productDiv.innerHTML = `
+            <h2>${product.name}</h2>
+            <img src="${product.Image}" alt="${product.name}";
+            <p>Harga: Rp. ${product.price.toLocaleString()}</p>
+            <input type="number" min="1" value="1" class="quantity" />
+            <button onclick="addToCart('${product.name}', ${product.price}, this)">Tambahkan ke Keranjang</button>
+            `;
+            productList.appendChild(productDiv);
+        } );
+
+        document.getElementById('total-price').innerText = `Total Harga: Rp.${totalPrice}`;
+}
     }
 
     // Memfilter produk
@@ -134,9 +150,6 @@ function updateCart() {
     document.getElementById('search-input').addEventListener('input', filterProducts);
 
     displayProducts(products);
-
-   document.getElementById('total-price').innerText = `Total Harga: Rp.${totalPrice}`;
-}
 
 // Mengubah jumlah produk di keranjang
 function changeQuantity(index, change) {
@@ -163,7 +176,7 @@ document.getElementById('checkout-form').addEventListener('submit' , function(ev
     const phone = document.getElementById('phone').value;
     const address = document.getElementById('Alamat').value;
     const paymentMethod = document.getElementById('payment-method').value;
-    const expiryDate = doocument.getElementById('expiry-date').value;
+    const expiryDate = document.getElementById('expiry-date').value;
 
     // Validasi Form
     if (!fullName || !email || !phone || !address || !paymentMethod) {
