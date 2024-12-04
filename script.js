@@ -29,13 +29,24 @@ const products = [
     { name: "Bubble Gun", quantity: 1, price: 300000, category: 'mainan', image: 'bubble gun.jpeg' },
 ];
 const cart = [];
+
+// Fungsi untuk memuat produk dari API atau localStorage
+function loadProducts() {
+    const storedProducts = localStorage.getItem('products');
+
+    if (storedProducts) {
+        const products = JSON.parse(storedProducts);
+        displayProducts(products);
+        }
+    }
+}
 // untuk mengambil data produk dari API
 async function fetchProducts() {
     const cacheKey = 'productsCache';
     const cachedData = localStorage.getItem(cacheKey);  
 
     if (cachedData) {
-        displayProduct(JSON.parse(cachedData));
+        displayProducts(JSON.parse(cachedData));
     } else {
         try {
             const response = await fetch('https://fakestoreapi.com/product');
@@ -139,6 +150,14 @@ function updateCart() {
         displayProducts(filteredProducts);
         }
     
+        // Fungsi untuk mencari produk
+    function searchProduct() {
+        const searchTerm = document.getElementById('search-input').value.toLowerCase();
+        const filteredProduct = product.filter(product =>
+            product.name.toLowerCase().includes(searchTerm)
+        );
+        displayProducts(filteredProducts);
+    }
 
     // Memfilter produk
     function filterProducts() {
