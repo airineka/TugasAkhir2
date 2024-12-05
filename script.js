@@ -37,9 +37,17 @@ function loadProducts() {
     if (storedProducts) {
         const products = JSON.parse(storedProducts);
         displayProducts(products);
-        }
+    } else {
+        fetch('https://fakestoreapi.com/product')
+            .then(response => response.json())
+            .then(data => {
+                localStorage.setItem('products', JSON.stringify(data));
+                displayProducts(data);
+            })
+            .catch(error => console.error('Error fetching products:', error)); 
     }
-}
+    }
+
 // untuk mengambil data produk dari API
 async function fetchProducts() {
     const cacheKey = 'productsCache';
