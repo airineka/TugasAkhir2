@@ -189,6 +189,16 @@ function updateCart() {
 
     displayProducts(products);
 
+    // Menyegarkan data
+function refreshData() {
+    localStorage.removeItem('products'); // Hapus data dari localStorage
+    loadProducts(); // Muat ulang produk dari API
+}
+
+// Event Listener untuk tombol segarkan
+document.getElementById('refresh-button').addEventListener('click', refreshData);
+
+
 // Mengubah jumlah produk di keranjang
 function changeQuantity(index, change) {
     cart[index].quantity += change;
