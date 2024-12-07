@@ -25,7 +25,7 @@ const products = [
     { name: "Kaktus", quantity: 1, price: 45000, category: 'mainan', image: 'kaktus.jpeg' },
     { name: "Puffer Ball", quantity: 1, price: 20000, category: 'mainan', image: 'pufferball.jpeg' },
     { name: "Boneka Dino", quantity: 1, price: 55000, category: 'mainan', image: 'Dinosaur soft toy.jpeg' },
-    { name: "Small Duck", quantity: 1, price: 38000, category: 'small duck.jpeg' },
+    { name: "Small Duck", quantity: 1, price: 38000, category: 'mainan', image: 'small duck.jpeg' },
     { name: "Bubble Gun", quantity: 1, price: 300000, category: 'mainan', image: 'bubble gun.jpeg' },
 ];
 const cart = [];
@@ -197,6 +197,9 @@ function refreshData() {
 
 // Event Listener untuk tombol segarkan
 document.getElementById('refresh-button').addEventListener('click', refreshData);
+
+// Muat produk saat halaman dimuat
+window.addEventListener('load', loadProducts);
 
 
 // Mengubah jumlah produk di keranjang
