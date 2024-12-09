@@ -93,6 +93,9 @@ function addToCart(productName, productPrice, button) {
         // Jika produk belum ada, tambahkan ke keranjang
         cart.push({ name: productName, price: productPrice, quantity: quantity });
     }
+
+    // Simpan keranjang ke LocalStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
         updateCart();
 }
 
@@ -129,6 +132,16 @@ function updateCart() {
     });
 
     document.getElementById('total-price').innerText = `Total Harga: Rp.${totalPrice}`;
+}
+
+// fungsi untuk memperbarui jumlah produk di keranjang
+function updateCartItem(productName, quantity) {
+    const existingProductIndex = cart.findIndex(item => item.name === productName);
+    if (existingProductIndex > -1) {
+        if (quantity <= 0) {
+            removeFromCart(productName);
+        }
+    }
 }
 
     // fungsi untuk menampilkan produk
