@@ -95,6 +95,7 @@ function addToCart(productName, productPrice, button) {
     }
 
     // Simpan keranjang ke LocalStorage
+function updateLocalStorage() {
     localStorage.setItem('cart', JSON.stringify(cart));
         updateCart();
 }
@@ -140,6 +141,11 @@ function updateCartItem(productName, quantity) {
     if (existingProductIndex > -1) {
         if (quantity <= 0) {
             removeFromCart(productName);
+        } else {
+            cart[existingProductIndex].quantity = quantity;
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateLocalStorage(); // Update localStorage setelah perubahan 
+            displayCart(); // Tampilkan ulang keranjang setelah perubahan
         }
     }
 }
@@ -229,6 +235,8 @@ function changeQuantity(index, change) {
 function removeFromCart(index) {
     cart.splice(index, 1);
     updateCart();
+    updateLocalStorage(); // Update localStorage setelah penghapusan
+    displayCart(); // Tampilkan ulang keranjang setelah penghapusan
 }
 
 // Checkout
@@ -283,4 +291,4 @@ inputs.forEach(input => {
 
 // Menampilkan pesan sukses atau error
 document.getElementById('reset-cart').addEventListener('click', resetCart);
-
+}
