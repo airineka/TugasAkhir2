@@ -92,7 +92,7 @@ function addToCart(productName, productPrice, button) {
     } else {
         // Jika produk belum ada, tambahkan ke keranjang
         cart.push({ name: productName, price: productPrice, quantity: quantity });
-    }
+    }}
 
     // Simpan keranjang ke LocalStorage
 function updateLocalStorage() {
@@ -247,6 +247,7 @@ document.getElementById('checkout-form').addEventListener('submit' , function(ev
     const email = document.getElementById('email').value;
     const phone = document.getElementById('phone').value;
     const address = document.getElementById('Alamat').value;
+    const creditCard = document.getElementById('credit-card').value;
     const paymentMethod = document.getElementById('payment-method').value;
     const expiryDate = document.getElementById('expiry-date').value;
 
@@ -254,6 +255,29 @@ document.getElementById('checkout-form').addEventListener('submit' , function(ev
     if (!fullName || !email || !phone || !address || !paymentMethod) {
         alert("Semua field harus diisi!");
         return;
+    }
+
+    // Validasi email
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(email)) {
+        alert('Email tidak valid');
+        return false;
+    }
+
+    // Validasi nomor telepon
+    const phoneRegex = /^\d{10,}$/;
+    if (!phoneRegex.test(phone)) {
+        alert('Nomor telepon tidak valid');
+        return false;
+    }
+
+    // Validasi nomor kartu kredit jika metode pembayaran kartu kredit 
+    if (paymentMethod.value === 'credit-card') {
+        const creditCardRegex = /^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3(?:[0-9]{4}|[0-9]{4} [0-9]{6})[0-9]{5})$/;
+        if (!creditCardRegex.test(creditCard)) {
+            alert('Nomor kartu kredit tidak valid');
+            return false;
+        }
     }
 
     if (paymentMethod === "Kartu Kredit" && !expiryDate) {
@@ -264,6 +288,7 @@ document.getElementById('checkout-form').addEventListener('submit' , function(ev
     //Jika semua validasi berhasil
     alert("Checkout berhasil! Terima Kasih, " + fullName);
     resetCart();
+
 });
 
 // reset keranjang dan form
@@ -291,4 +316,4 @@ inputs.forEach(input => {
 
 // Menampilkan pesan sukses atau error
 document.getElementById('reset-cart').addEventListener('click', resetCart);
-}
+
