@@ -251,6 +251,24 @@ document.getElementById('checkout-form').addEventListener('submit' , function(ev
     const paymentMethod = document.getElementById('payment-method').value;
     const expiryDate = document.getElementById('expiry-date').value;
 
+ // Tambahkan metode pembayaran
+    const paymentMethods = {
+        'credit-card' : 'Kartu Kredit',
+        'bank-transfer': 'Transfer Bank',
+        'e-wallet': 'E-Wallet',
+        'cash-on-delivery': 'Bayar di Tempat'
+    };
+
+    // Tambahkan opsi metode pembayaran ke form
+    const paymentMethodSelect = document.getElementById('payment-method');
+    Object.keys(paymentMethods).forEach(method => {
+        const option = document.createElement('option');
+        option.value = method;
+        option.text = paymentMethods[method];
+        paymentMethodSelect.appendChild(option);
+    });
+
+
     // Validasi Form
     if (!fullName || !email || !phone || !address || !paymentMethod) {
         alert("Semua field harus diisi!");
@@ -270,7 +288,7 @@ document.getElementById('checkout-form').addEventListener('submit' , function(ev
         alert('Nomor telepon tidak valid');
         return false;
     }
-
+// Validasi metode pembayaran
     // Validasi nomor kartu kredit jika metode pembayaran kartu kredit 
     if (paymentMethod.value === 'credit-card') {
         const creditCardRegex = /^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3(?:[0-9]{4}|[0-9]{4} [0-9]{6})[0-9]{5})$/;
@@ -278,7 +296,29 @@ document.getElementById('checkout-form').addEventListener('submit' , function(ev
             alert('Nomor kartu kredit tidak valid');
             return false;
         }
+    } else if (paymentMethod === 'bank-transfer') {
+        // Validasi nomor e-wallet
+        const eWalletRegex = /^\d{10,}$/;
+        if (!eWalletRegex.test(eWallet)) {
+            alert('Nomor e-wallet tidak valid');
+            return false;
+        }
+    } else if (paymentMethod === 'cash-on-delivery') {
+   }
+
+   // Tambahkan fungsi pembayaran
+   function processPayment() {
+    if (paymentMethod === 'credit-card') {
+
+    } else if (paymentMethod === 'bank-transfer') {
+
+    } else if (paymentMethod === 'e-wallet') {
+
+    } else if (paymentMethod === 'cash-on-delivery') {
+          
     }
+   }
+
 
     if (paymentMethod === "Kartu Kredit" && !expiryDate) {
         alert("Tanggal kadaluarsa harus diisi jika metode pembayaran adalah Kartu Kredit.");
