@@ -92,7 +92,18 @@ function addToCart(productName, productPrice, button) {
     } else {
         // Jika produk belum ada, tambahkan ke keranjang
         cart.push({ name: productName, price: productPrice, quantity: quantity });
-    }}
+    }
+
+    // Animasi untuk menunjukkan item ditambahkan
+  const cartIcon = document.getElementById('cartIcon');
+  const dot = createCartDot();
+  cartIcon.append(dot);
+
+  // Menjalankan animasi
+  setTimeout(() => {
+    dot.remove(); // Menghapus dot setelah animasi selesai
+  }, 700);
+}
 
     // Simpan keranjang ke LocalStorage
 function updateLocalStorage() {
@@ -183,7 +194,7 @@ function updateCartItem(productName, quantity) {
         const filteredProduct = product.filter(product =>
             product.name.toLowerCase().includes(searchTerm)
         );
-        displayProducts(filteredProducts);
+        displayProducts(filteredProduct);
     }
 
     // Memfilter produk
@@ -330,6 +341,26 @@ document.getElementById('checkout-form').addEventListener('submit' , function(ev
     resetCart();
 
 });
+
+// Fungsi untuk membuka modal
+function openModal(message) {
+    document.getElementById('modalMessage').innerText = message;
+    document.getElementById('checkoutModal').style.display = 'block';
+  }
+  
+  // Fungsi untuk menutup modal
+  function closeModal() {
+    document.getElementById('checkoutModal').style.display = 'none';
+  }
+  
+  // Contoh penggunaan setelah checkout
+  function processCheckout(success) {
+    if (success) {
+      openModal('Checkout berhasil! Terima kasih atas pembelian Anda.');
+    } else {
+      openModal('Terjadi kesalahan saat checkout. Silakan coba lagi.');
+    }
+  }
 
 // reset keranjang dan form
 function resetCart() {

@@ -59,3 +59,16 @@ button:hover {
 label, input, select {
     margin: 10px 0;
 }
+
+
+.modal.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (max-width: 600px) {
+    .modal {
+        width: 90%;
+        margin: auto;
+    }
+}
