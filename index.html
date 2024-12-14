@@ -246,15 +246,19 @@
                     <span class="close" id="close-modal">&times;</span>
                     <h2>Form Checkout</h2>
                     <form id="checkout-form">
-                        <input type="text" id="full-name" placeholder="Nama Lengkap" required title="Masukkan Nama Lengkap Anda">
-                        <input type="email" id="email" placeholder="Email" required title="Masukkan Email Anda">
-                        <input type="tel" id="phone" placeholder="Nomor Telepon" required title="Masukkan Nomor Telepon Anda">
-                        <input type="text" id="Alamat" placeholder="Alamat" required title="Masukkan Alamat Anda">
+                        <input type="text" id="full-name" placeholder="Nama Lengkap" required title="Masukkan Nama Lengkap Anda"><br><br>
+                        <input type="email" id="email" placeholder="Email" required title="Masukkan Email Anda"><br><br>
+                        <input type="text" id="phone" placeholder="Nomor Telepon" required title="Masukkan Nomor Telepon Anda"><br><br>
+                        <input type="text" id="Alamat" placeholder="Alamat" required title="Masukkan Alamat Anda"><br><br>
                         <select id="payment-method" required title="Pilih Metode Pembayaran">
                             <option value="">Pilih Metode Pembayaran</option>
                             <option value="Kartu Kredit">Kartu Kredit</option>
                             <option value="Transfer Bank">Transfer Bank</option>
-                        </select>
+                            <option value="E-Wallet">E-Wallet</option>
+                            <option value="Cash-on-delivery">COD</option>
+                        </select><br><br>
+                        <label for="credit-card" id="credit-card-label">Nomor Kartu Kredit:</label>
+                        <input type="text" id="credit-card" name="credit-card" placeholder="nomor kartu" required title="Masukkan nomor kartu kredit anda"><br><br>
                         <input type="text" id="expiry-date" placeholder="Tanggal Kadaluarsa (MM/YY)" title="Masukkan Tanggal Kadaluarsa">
                         <button type="submit">Kirim</button>
                     </form>
