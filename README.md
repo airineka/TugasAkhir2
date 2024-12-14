@@ -18,6 +18,11 @@ Cara Menjalankan proyek :
 - Jika sudah klik kirim
 
 Penjelasan setiap branch dan fitur-fiturnya : 
-- 
+- feature-product-api : untuk membuat produk dari API yang mencakup gambar, nama produk, harga, dan tombol "tambahkan ke keranjang".
+- feature-filter-search : untuk menambahkan fitur pencarian produk.
+- feature-temp-storage : untuk menyimpan data produk menggunakan localStorage dan menambahkan fitur segarkan data untuk menghapus storage dan memuat ulang data dari API.
+- feature-localstorage-cart : untuk menyimpan data keranjang belanja agar tidak hilang saat di refresh dan untuk meng-update ketika pengguna menambahkan, menghapus, atau mengubah jumlah produk.
+- feature-checkout-validations : untuk menabahkan validasi form checkout mengguanakn Regex, menambahkan nomor kartu kredit, dan menambahkan metode pembayaran seperti marketplace.
+- feature-ui-animations : untuk menambahkan animasi saat produk ditambahkan ke keranjang dan menampilkan pesan sukses atau error setelah checkout.
 
 
