@@ -25,17 +25,36 @@ const products = [
     { name: "Kaktus", quantity: 1, price: 45000, category: 'mainan', image: 'kaktus.jpeg' },
     { name: "Puffer Ball", quantity: 1, price: 20000, category: 'mainan', image: 'pufferball.jpeg' },
     { name: "Boneka Dino", quantity: 1, price: 55000, category: 'mainan', image: 'Dinosaur soft toy.jpeg' },
-    { name: "Small Duck", quantity: 1, price: 38000, category: 'small duck.jpeg' },
+    { name: "Small Duck", quantity: 1, price: 38000, category: 'mainan', image: 'small duck.jpeg' },
     { name: "Bubble Gun", quantity: 1, price: 300000, category: 'mainan', image: 'bubble gun.jpeg' },
 ];
 const cart = [];
+
+// Fungsi untuk memuat produk dari API atau localStorage
+function loadProducts() {
+    const storedProducts = localStorage.getItem('products');
+
+    if (storedProducts) {
+        const products = JSON.parse(storedProducts);
+        displayProducts(products);
+    } else {
+        fetch('https://fakestoreapi.com/product')
+            .then(response => response.json())
+            .then(data => {
+                localStorage.setItem('products', JSON.stringify(data));
+                displayProducts(data);
+            })
+            .catch(error => console.error('Error fetching products:', error)); 
+    }
+    }
+
 // untuk mengambil data produk dari API
 async function fetchProducts() {
     const cacheKey = 'productsCache';
     const cachedData = localStorage.getItem(cacheKey);  
 
     if (cachedData) {
-        displayProduct(JSON.parse(cachedData));
+        displayProducts(JSON.parse(cachedData));
     } else {
         try {
             const response = await fetch('https://fakestoreapi.com/product');
@@ -139,6 +158,14 @@ function updateCart() {
         displayProducts(filteredProducts);
         }
     
+        // Fungsi untuk mencari produk
+    function searchProduct() {
+        const searchTerm = document.getElementById('search-input').value.toLowerCase();
+        const filteredProduct = product.filter(product =>
+            product.name.toLowerCase().includes(searchTerm)
+        );
+        displayProducts(filteredProducts);
+    }
 
     // Memfilter produk
     function filterProducts() {
@@ -161,6 +188,19 @@ function updateCart() {
     document.getElementById('search-input').addEventListener('input', filterProducts);
 
     displayProducts(products);
+
+    // Menyegarkan data
+function refreshData() {
+    localStorage.removeItem('products'); // Hapus data dari localStorage
+    loadProducts(); // Muat ulang produk dari API
+}
+
+// Event Listener untuk tombol segarkan
+document.getElementById('refresh-button').addEventListener('click', refreshData);
+
+// Muat produk saat halaman dimuat
+window.addEventListener('load', loadProducts);
+
 
 // Mengubah jumlah produk di keranjang
 function changeQuantity(index, change) {
