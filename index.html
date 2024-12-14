@@ -9,6 +9,19 @@
         <body>
             <div class="container">
                 <h1> Daftar Produk Mainan Anak</h1>
+
+                <!-- Menambahkan filter kategori dan input pencarian-->
+                 <label for="category-filter">Filter Kategori:</label>
+                 <select id="category-filter">
+                    <option value="">Semua Kategori</option>
+                    <option value="mainan">Mainan</option>
+                 </select>
+
+                 <input type="text" id="search-input" placeholder="Cari Produk...">
+                 <button onclick="searchProduct()">Cari</button>
+
+                 <div id="product-list"></div>
+                 
                 <div class="product-list">
                     <div class="product">
                 <h2>Mobil Mainan</h2>

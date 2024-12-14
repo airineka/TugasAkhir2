@@ -1,38 +1,64 @@
-let cart = [
+const products = [
 
-//const cart = [
-    { name: "Mobil Mainan", quantity: 1, price: 50000 },
-    { name: "Sepeda Mainan", quantity: 1, price: 90000 },
-    { name: "Telephone", quantity: 1, price: 30000 },
-    { name: "Pop It", quantity: 1, price: 65000 },
-    { name: "Boneka Beruang", quantity: 1, price: 150000 },
-    { name: "Piano Toy", quantity: 1, price: 200000 },
-    { name: "Blok Bangunan", quantity: 1, price: 45000 },
-    { name: "Mesin Jahit", quantity: 1, price: 35000 },
-    { name: "Lato-Lato", quantity: 1, price: 7000 },
-    { name: "Boneka Labubu", quantity: 1, price: 10000 },
-    { name: "Bike Helmet", quantity: 1, price: 185000 },
-    { name: "Kacamata Renang", quantity: 1, price: 12000 },
-    { name: "Kolam Anak", quantity: 1, price: 142000 },
-    { name: "Trampolin", quantity: 1, price: 830000 },
-    { name: "Perosotan", quantity: 1, price: 880000 },
-    { name: "Laptop Mainan", quantity: 1, price: 60000 },
-    { name: "Mobil Remote", quantity: 1, price: 200000 },
-    { name: "Basketball", quantity: 1, price: 125000 },
-    { name: "Animal Jumping", quantity: 1, price: 90000 },
-    { name: "Pancing Magnet", quantity: 1, price: 17000 },
-    { name: "Bath Duck", quantity: 1, price: 20000 },
-    { name: "Kaktus", quantity: 1, price: 45000 },
-    { name: "Puffer Ball", quantity: 1, price: 20000 },
-    { name: "Boneka Dino", quantity: 1, price: 55000 },
-    { name: "Small Duck", quantity: 1, price: 38000 },
-    { name: "Bubble Gun", quantity: 1, price: 300000 },
+//const cart = [];
+    { name: "Mobil Mainan", quantity: 1, price: 50000,  category: 'mainan', image: 'Mobil Mainan.jpg' },
+    { name: "Sepeda Mainan", quantity: 1, price: 90000, category: 'mainan',  image: 'funbike-vespa-warna-kuning.png' },
+    { name: "Telephone", quantity: 1, price: 30000, category: 'mainan', image: 'Telephonemobil tarik.jpg' },
+    { name: "Pop It", quantity: 1, price: 65000, category: 'mainan', image: 'img11012-1690972867.jpg' },
+    { name: "Boneka Beruang", quantity: 1, price: 150000, category: 'mainan', image: 'Boneka Beruang.jpg' },
+    { name: "Piano Toy", quantity: 1, price: 200000, category: 'mainan', image: 'https___twitter_com_MomsTrustyDeals_status_1015301990774165507 ☝️🔥Enter Multi-Use code 25AN096PI at checkout for 25% OFF🔥☝️ 👉Prices_codes valid at time posted & can expire at anytime.jpeg' },
+    { name: "Blok Bangunan", quantity: 1, price: 45000, category: 'mainan', image: 'tausendkind Online Shop für Baby- & Kinderausstattung.jpeg' },
+    { name: "Mesin Jahit", quantity: 1, price: 35000, category: 'mainan', image: 'mesin jahit.jpeg' },
+    { name: "Lato-Lato", quantity: 1, price: 7000, category: 'mainan', image: 'Bola Klakson, Latto, Mainan, Klakson PNG Transparan Clipart dan File PSD untuk Unduh Gratis.jpeg' },
+    { name: "Boneka Labubu", quantity: 1, price: 10000, category: 'mainan', image: 'download (1).jpeg' },
+    { name: "Bike Helmet", quantity: 1, price: 185000, category: 'mainan', image: 'Miniz Mouse.jpeg' },
+    { name: "Kacamata Renang", quantity: 1, price: 12000, category: 'mainan', image: 'download.jpeg' },
+    { name: "Kolam Anak", quantity: 1, price: 142000, category: 'mainan', image: 'kolam anak.jpeg' },
+    { name: "Trampolin", quantity: 1, price: 830000, category: 'mainan', image: 'trampolin.jpeg' },
+    { name: "Perosotan", quantity: 1, price: 880000, category: 'mainan', image: 'trampolin.jpeg' },
+    { name: "Laptop Mainan", quantity: 1, price: 60000, category: 'mainan', image: 'laptop mainan.jpeg' },
+    { name: "Mobil Remote", quantity: 1, price: 200000, category: 'mainan', image: 'mobil remote.jpeg' },
+    { name: "Basketball", quantity: 1, price: 125000, category: 'mainan', image: 'basketball.jpeg' },
+    { name: "Animal Jumping", quantity: 1, price: 90000, category: 'mainan', image: 'animal jumping.jpeg  ' },
+    { name: "Pancing Magnet", quantity: 1, price: 17000, category: 'mainan', image: 'pancing.jpeg' },
+    { name: "Bath Duck", quantity: 1, price: 20000, category: 'mainan', image: 'Novelty Place Assorted Rubber Ducks.jpeg' },
+    { name: "Kaktus", quantity: 1, price: 45000, category: 'mainan', image: 'kaktus.jpeg' },
+    { name: "Puffer Ball", quantity: 1, price: 20000, category: 'mainan', image: 'pufferball.jpeg' },
+    { name: "Boneka Dino", quantity: 1, price: 55000, category: 'mainan', image: 'Dinosaur soft toy.jpeg' },
+    { name: "Small Duck", quantity: 1, price: 38000, category: 'small duck.jpeg' },
+    { name: "Bubble Gun", quantity: 1, price: 300000, category: 'mainan', image: 'bubble gun.jpeg' },
 ];
+const cart = [];
+// untuk mengambil data produk dari API
+async function fetchProducts() {
+    const cacheKey = 'productsCache';
+    const cachedData = localStorage.getItem(cacheKey);  
+
+    if (cachedData) {
+        displayProduct(JSON.parse(cachedData));
+    } else {
+        try {
+            const response = await fetch('https://fakestoreapi.com/product');
+            const products = await response.json();
+            localStorage.setItem(cacheKey, JSON.stringify(products));
+            displayProducts(products);
+        } catch (error) {
+            console.error();
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    fetchProducts();
+});
 
 // menambahkan produk ke keranjang
 function addToCart(productName, productPrice, button) {
+    console.log(`Menambahkan ${productName} ke keranjang dengan harga ${productPrice}`);
     const quantityInput = button.previousElementSibling;
-    const quantity = parseInt(quantityInput.value);  
+    const quantity = parseInt(quantityInput.value); 
+    console.log(`Jumlah yang dipilih: ${quantity}`);
+
 
     if (quantity <= 0) {
         alert("Jumlah Produk Tidak Boleh Nol.");
@@ -43,7 +69,7 @@ function addToCart(productName, productPrice, button) {
 
     if (existingProductIndex > -1) {
       // Jika Produk sudah ada di keranjang, tambahkan jumlahnya
-      cart[existingProductIndex].quantity += item.quantity;
+      cart[existingProductIndex].quantity += quantity;
     } else {
         // Jika produk belum ada, tambahkan ke keranjang
         cart.push({ name: productName, price: productPrice, quantity: quantity });
@@ -83,8 +109,58 @@ function updateCart() {
                 cartItemsContainer.appendChild(itemDiv)
     });
 
-   document.getElementById('total-price').innerText = `Total Harga: Rp.${totalPrice}`;
+    document.getElementById('total-price').innerText = `Total Harga: Rp.${totalPrice}`;
 }
+
+    // fungsi untuk menampilkan produk
+    function displayProducts(productList) {
+        const productList = document.getElementById('product-list');
+        productListContainer.innerHTML = ''; //kososngkan daftar produk
+
+        productList.forEach(product => {
+            const productDiv = document.createElement('div');
+            productDiv.className='product';
+            productDiv.innerHTML = `
+            <h2>${product.name}</h2>
+            <img src="${product.image}" alt="${product.name}";
+            <p>Harga: Rp. ${product.price.toLocaleString()}</p>
+            <input type="number" min="1" value="1" class="quantity" />
+            <button onclick="addToCart('${product.name}', ${product.price}, this)">Tambahkan ke Keranjang</button>
+            `;
+            productListContainer.appendChild(productDiv);
+        } );
+    }
+
+    function searchProduct() {
+        const searchTerm = document.getElementById('search-input').value.toLowerCase();
+        const filteredProducts = products.filter(product => 
+            product.name.toLowerCase().includes(searchTerm)   
+        );
+        displayProducts(filteredProducts);
+        }
+    
+
+    // Memfilter produk
+    function filterProducts() {
+        const categoryFilter = document.getElementById('category-filter').value;
+        const searchInput = document.getElementById('search-input').value.toLowerCase();
+
+        const filteredProducts = products.filter(product => {
+            const matchesCategory = categoryFilter === '' || product.category === categoryFilter;
+            const matchesSearch = product.name.toLowerCase().includes(searchInput);
+            return matchesCategory && matchesSearch;
+     });
+
+     displayProducts(filteredProducts);
+    }
+
+    // Event listener untuk filter kategori
+    document.getElementById('category-filter').addEventListener('change', filterProducts);
+
+    // Event Listener untuk pencarian
+    document.getElementById('search-input').addEventListener('input', filterProducts);
+
+    displayProducts(products);
 
 // Mengubah jumlah produk di keranjang
 function changeQuantity(index, change) {
@@ -111,7 +187,7 @@ document.getElementById('checkout-form').addEventListener('submit' , function(ev
     const phone = document.getElementById('phone').value;
     const address = document.getElementById('Alamat').value;
     const paymentMethod = document.getElementById('payment-method').value;
-    const expiryDate = doocument.getElementById('expiry-date').value;
+    const expiryDate = document.getElementById('expiry-date').value;
 
     // Validasi Form
     if (!fullName || !email || !phone || !address || !paymentMethod) {
